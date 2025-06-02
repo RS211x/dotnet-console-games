@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.Threading;
 
 int width = Console.WindowWidth;
+int halfway = width / 2;
 int height = Console.WindowHeight;
 float multiplier = 1.1f;
-TimeSpan delay = TimeSpan.FromMilliseconds(10);
+TimeSpan delay = TimeSpan.FromMilliseconds(1);
 TimeSpan enemyInputDelay = TimeSpan.FromMilliseconds(100);
 int paddleSize = height / 4;
 Stopwatch stopwatch = new();
@@ -13,14 +14,26 @@ Stopwatch enemyStopwatch = new();
 int scoreA = 0;
 int scoreB = 0;
 Ball ball;
-int paddleA = height / 3;
-int paddleB = height / 3;
+int paddleA = height / 5;
+int paddleB = height / 5;
 
 Console.Clear();
 stopwatch.Restart();
 enemyStopwatch.Restart();
 Console.CursorVisible = false;
-while (scoreA < 3 && scoreB < 3)
+
+Console.ForegroundColor = ConsoleColor.DarkGreen;
+string originalString = ($"Player: {scoreA} | Computer: {scoreB}");
+int startIndex = 5;
+int length = 6;
+string middleSubstring = originalString.Substring(startIndex, length);
+
+string text = ($"Player: {scoreA} | Computer: {scoreB}");
+int len = text.Length;
+int startpoint = (width - len) / 2;
+Console.SetCursorPosition(startpoint, 0);
+Console.Write($"Player: {scoreA} | Computer: {scoreB}");
+while (scoreA < 5 && scoreB < 5)
 {
 	ball = CreateNewBall();
 	while (true)
@@ -29,7 +42,7 @@ while (scoreA < 3 && scoreB < 3)
 
 		// Compute Time And New Ball Position
 		float time = (float)stopwatch.Elapsed.TotalSeconds * 15;
-		var (X2, Y2) = (ball.X + (time * ball.dX), ball.Y + (time * ball.dY));
+		var (X2, Y2) = (ball.X + (2 * time * ball.dX), ball.Y + (2 * time * ball.dY));
 
 		// Collisions With Up/Down Walls
 		if (Y2 < 0 || Y2 > height)
@@ -86,7 +99,9 @@ while (scoreA < 3 && scoreB < 3)
 		ball.X += time * ball.dX;
 		ball.Y += time * ball.dY;
 		Console.SetCursorPosition((int)ball.X, (int)ball.Y);
-		Console.Write('O');
+		Console.ForegroundColor = ConsoleColor.Green;
+		Console.Write('⚪');
+		Console.ForegroundColor = ConsoleColor.White;
 
 		#endregion
 
@@ -140,6 +155,31 @@ while (scoreA < 3 && scoreB < 3)
 
 		#endregion
 
+		// render halfway lines
+		for (int i = 3; i < height; i += 5)
+		{
+			Console.SetCursorPosition(halfway, i);
+			Console.ForegroundColor = ConsoleColor.White;
+			{
+
+			}
+			Console.Write('█');
+			
+		}
+
+		// render goal
+		for (int i = 3; i < height; i++)
+		{
+			Console.ForegroundColor = ConsoleColor.DarkRed;
+			Console.SetCursorPosition(1, i);
+			Console.Write('|');
+			Console.SetCursorPosition(width, i);
+			Console.Write('|');
+			Console.ForegroundColor = ConsoleColor.White;
+			
+		}
+
+
 		stopwatch.Restart();
 		Thread.Sleep(delay);
 	}
@@ -147,13 +187,14 @@ while (scoreA < 3 && scoreB < 3)
 	Console.Write(' ');
 }
 Console.Clear();
+
 if (scoreA > scoreB)
-{
-	Console.Write("You win.");
+{   Console.Clear();
+	Console.Write("Player wins.");
 }
 if (scoreA < scoreB)
 {
-	Console.Write("You lose.");
+	Console.Write("Comnputer wins.");
 }
 
 Ball CreateNewBall()
