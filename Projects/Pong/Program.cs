@@ -22,7 +22,7 @@ stopwatch.Restart();
 enemyStopwatch.Restart();
 Console.CursorVisible = false;
 
-Console.ForegroundColor = ConsoleColor.DarkGreen;
+Console.ForegroundColor = ConsoleColor.Green;
 string originalString = ($"Player: {scoreA} | Computer: {scoreB}");
 int startIndex = 5;
 int length = 6;
