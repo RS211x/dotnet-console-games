@@ -35,7 +35,7 @@ while (scoreA < 5 && scoreB < 5)
 		#region Update Ball
 
 		// Compute Time And New Ball Position
-		float time = (float)stopwatch.Elapsed.TotalSeconds * 15;
+		float time = (float)stopwatch.Elapsed.TotalSeconds * 90;
 		var (X2, Y2) = (ball.X + (2 * time * ball.dX), ball.Y + (2 * time * ball.dY));
 
 		// Collisions With Up/Down Walls
