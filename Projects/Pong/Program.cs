@@ -14,8 +14,8 @@ Stopwatch enemyStopwatch = new();
 int scoreA = 0;
 int scoreB = 0;
 Ball ball;
-int paddleA = height / 5;
-int paddleB = height / 5;
+int paddleA = height / 6;
+int paddleB = height / 6;
 
 Console.Clear();
 stopwatch.Restart();
