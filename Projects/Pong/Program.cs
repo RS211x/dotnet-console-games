@@ -22,12 +22,6 @@ stopwatch.Restart();
 enemyStopwatch.Restart();
 Console.CursorVisible = false;
 
-Console.ForegroundColor = ConsoleColor.Green;
-string originalString = ($"Player: {scoreA} | Computer: {scoreB}");
-int startIndex = 5;
-int length = 6;
-string middleSubstring = originalString.Substring(startIndex, length);
-
 string text = ($"Player: {scoreA} | Computer: {scoreB}");
 int len = text.Length;
 int startpoint = (width - len) / 2;
