@@ -99,9 +99,8 @@ while (scoreA < 5 && scoreB < 5)
 		ball.X += time * ball.dX;
 		ball.Y += time * ball.dY;
 		Console.SetCursorPosition((int)ball.X, (int)ball.Y);
-		Console.ForegroundColor = ConsoleColor.Green;
 		Console.Write('⚪');
-		Console.ForegroundColor = ConsoleColor.White;
+		
 
 		#endregion
 
